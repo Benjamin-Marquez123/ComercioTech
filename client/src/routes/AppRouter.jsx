@@ -1,40 +1,29 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Login from "../pages/Login";
+import ProtectedByRole from "./ProtectedByRole";
 import Register from "../pages/Register";
-import LandinPage from "../pages/Landing_page"
-import RecuperarContraseña from "../pages/RecuperarContraseña";
-import ProtectedByRole from './ProtectedByRole';
-import NotFound from "../pages/NotFound"
+import Login from "../pages/Login"
+import NotFound from "../pages/NotFound";
 
-
-//Cliente
-import ClienteLayout from "../components/cliente/layout/ClienteLayout";
+//cliente
+import ClienteLayout from "../components/cliente/ClienteLayout";
 import HomeCliente from "../pages/cliente/HomeCliente";
-import Productos from "../pages/cliente/VerProductos";
-import VerSolicitudes from "../pages/cliente/MisPedidos";
-import PerfilCliente from "../pages/cliente/EditarPerfil";
-//Admin
-import AdminLayout from '../components/admin/layout/AdminLayout';
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import AdminAdministradores from "../pages/admin/AdminAdministradores";
-import AdminClientes from "../pages/admin/AdminClientes";
-import AdminEmpresas from "../pages/admin/AdminEmpresas"
+import ProductosCliente from "../pages/cliente/ProductosCliente";
+import PedidosClientes from "../pages/cliente/PedidosCliente"
+import EditarPerfil from "../pages/cliente/EditarPerfil"
 
 //Empresa
-import EmpresaLayout from "../components/empresa/layout/EmpresaLayout";
-import EmpresaDashboard from "../pages/empresa/EmpresaDashboard";
-import EmpresaPerfil from "../pages/empresa/PerfilEmpresa";
-import EmpresaProducto from "../pages/empresa/Producto"
-import EmpresaPedidos from "../pages/empresa/SolicitudesClientes";
+import EmpresaLayout from "../components/empresa/EmpresaLayout";
+import HomeEmpresa from "../pages/empresa/HomeEmpresa";
+import ProductosEmpresa from "../pages/empresa/ProductosEmpresa";
+import PedidosEmpresa from "../pages/empresa/PedidosEmpresa";
+import ClientesEmpresa from "../pages/empresa/ClientesEmpresa";
 
 export default function AppRouter() {
     return (
         <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={<LandinPage />} />
-            <Route path="/registro" element={<Register />} />
-            <Route path="/recuperar-password" element={<RecuperarContraseña />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/registrar" element={<Register />} />
+            <Route path="/*" element={<NotFound />} />
 
             <Route path="/cliente" element={
                 <ProtectedByRole allowed={["cliente"]}>
@@ -42,22 +31,9 @@ export default function AppRouter() {
                 </ProtectedByRole>
             }>
                 <Route path="HomeCliente" element={<HomeCliente />} />
-                <Route path="VerProductos" element={<Productos />} />
-                <Route path="MisPedidos" element={<VerSolicitudes />} />
-                <Route path="EditarPerfil" element={<PerfilCliente />} />
-            </Route>
-                
-        
-            <Route path="/admin" element={
-                <ProtectedByRole allowed={["admin"]}>
-                    <AdminLayout/>
-                </ProtectedByRole>
-        }>
-                <Route path="dashboard" element={<AdminDashboard/>} />
-                <Route path="administradores" element={<AdminAdministradores/>} />
-                <Route path="empresas" element={<AdminEmpresas/>} />
-                <Route path="empresas" element={<AdminEmpresas/>} />
-                <Route path="clientes" element={<AdminClientes/>} />
+                <Route path="ProductosCliente" element={<ProductosCliente />} />
+                <Route path="PedidosCliente" element={<PedidosClientes />} />
+                <Route path="EditarPerfil" element={<EditarPerfil />} />
             </Route>
 
             <Route path="/empresa" element={
@@ -65,11 +41,10 @@ export default function AppRouter() {
                     <EmpresaLayout/>
                 </ProtectedByRole>
             }>
-                <Route path="dashboard" element={<EmpresaDashboard/>} />
-                <Route path="producto" element={<EmpresaProducto/>} />
-                <Route path="perfil" element={<EmpresaPerfil />} />
-                <Route path="pedidos" element={<EmpresaPedidos />} />
-                
+                <Route path="HomeEmpresa" element={<HomeEmpresa />} />
+                <Route path="ProductosEmpresa" element={<ProductosEmpresa />} />
+                <Route path="PedidosEmpresa" element={<PedidosEmpresa />} />
+                <Route path="ClientesEmpresa" element={<ClientesEmpresa />} />
             </Route>
         </Routes>
 

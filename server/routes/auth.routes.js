@@ -1,5 +1,6 @@
 import express from 'express';
-import { registrar, login } from '../controllers/authController.js';
+import { registrar, login, obtenerPerfil, actualizarPerfil, obtenerClientes } from '../controllers/auth.js';
+import { validarJWT } from "../middleware/validarJWT.js"
 
 const router = express.Router();
 
@@ -7,10 +8,14 @@ const router = express.Router();
 // @desc    Registrar usuario
 // @access  Public
 router.post('/registrar', registrar);
+router.post('/login', login);
+router.get("/perfil", validarJWT, obtenerPerfil);
+router.put("/perfil", validarJWT, actualizarPerfil);
+router.get("/clientes", validarJWT, obtenerClientes);
+
 
 // @route   POST api/auth/login
 // @desc    Iniciar sesión
 // @access  Public
-router.post('/login', login);
 
 export default router;
