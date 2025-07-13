@@ -105,7 +105,7 @@ export default function Register() {
     }
 
     if (!validarPassword(formData.password)) {
-      newErrors.password = "Mínimo 8 caracteres, con mayúsculas, minúsculas y números XD";
+      newErrors.password = "Mínimo 8 caracteres, con mayúsculas, minúsculas y números";
     }
 
     if (formData.password !== formData.confirmPassword) {
@@ -231,7 +231,7 @@ export default function Register() {
                     />
                     {errors.password && <div className="invalid-feedback">{errors.password}</div>}
                     <small className="form-text text-muted">
-                      Mínimo 6 caracteres, con mayúsculas, minúsculas y números Sexo
+                      Mínimo 6 caracteres, con mayúsculas, minúsculas y números
                     </small>
                   </div>
 
