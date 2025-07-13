@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
-        const res = await axios.get("http://3.220.10.212:5000/api/usuarios/perfil", {
+        const res = await axios.get("/api/usuarios/perfil", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUserData(res.data);

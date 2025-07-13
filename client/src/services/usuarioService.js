@@ -1,7 +1,7 @@
 // src/services/usuarioService.js
 import axios from "axios";
 
-const API_URL = "http://3.220.10.212:5000/api/auth/clientes";
+const API_URL = "/api/auth/clientes";
 
 export const obtenerClientes = async () => {
   const token = localStorage.getItem("token");

@@ -1,7 +1,7 @@
 // src/services/productoService.js
 import axios from "axios";
 
-const API_URL = "http://3.220.10.212:5000/api/productos";
+const API_URL = "/api/productos";
 
 // Función para obtener el token guardado
 const getAuthHeader = () => {

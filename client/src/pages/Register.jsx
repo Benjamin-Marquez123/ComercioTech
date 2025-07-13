@@ -131,7 +131,7 @@ export default function Register() {
     try {
       // Preparar datos para enviar (eliminar confirmPassword)
       const { confirmPassword, ...datosEnvio } = formData;
-      await axios.post("http://3.220.10.212:5000/api/auth/registrar", datosEnvio);
+      await axios.post("/api/auth/registrar", datosEnvio);
 
       
       await Swal.fire({

@@ -18,7 +18,7 @@ export default function PerfilUsuario() {
     // Obtener perfil al montar
     const obtenerPerfil = async () => {
       try {
-        const res = await axios.get("http://3.220.10.212:5000/api/auth/perfil", {
+        const res = await axios.get("/api/auth/perfil", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUsuario(res.data);
@@ -70,7 +70,7 @@ export default function PerfilUsuario() {
 
     try {
       const res = await axios.put(
-        "http://3.220.10.212:5000/api/auth/perfil",
+        "/api/auth/perfil",
         {
           nombre: form.nombre,
           telefono: form.telefono,
