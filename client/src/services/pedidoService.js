@@ -1,7 +1,7 @@
 // src/services/pedidoService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/pedidos";
+const API_URL = "http://3.220.10.212:5000/api/pedidos";
 
 const getAuthHeader = () => {
   const token = localStorage.getItem("token");
