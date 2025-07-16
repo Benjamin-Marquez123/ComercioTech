@@ -131,9 +131,11 @@ export default function Register() {
     try {
       // Preparar datos para enviar (eliminar confirmPassword)
       const { confirmPassword, ...datosEnvio } = formData;
-      await axios.post("/api/auth/registrar", datosEnvio);
+      const res = await axios.post("/api/auth/registrar", datosEnvio);
 
-      
+      // Guardar el token
+      login(res.data.token);
+
       await Swal.fire({
         title: "¡Registro exitoso!",
         text: "Tu cuenta ha sido creada correctamente",
