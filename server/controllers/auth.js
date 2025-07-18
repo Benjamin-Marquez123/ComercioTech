@@ -23,11 +23,17 @@ export const registrar = async (req, res) => {
     });
     
     if (usuarioExistente) {
+      const campoDuplicado = usuarioExistente.email === email ? 'email' : 'rut';
+      const mensajeCampo = campoDuplicado === 'email' 
+        ? 'El correo ya está registrado' 
+        : 'El RUT ya está registrado';
+      
       return res.status(400).json({ 
-        msg: 'El usuario ya existe',
-        campo: usuarioExistente.email === email ? 'email' : 'rut'
+        msg: mensajeCampo,
+        campo: campoDuplicado
       });
     }
+
 
     // Validar RUT chileno
     if (!validarRUTChileno(rut)) {

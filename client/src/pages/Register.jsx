@@ -90,12 +90,13 @@ export default function Register() {
     }
   };
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     const newErrors = {};
 
-    // Validaciones
+    // Validaciones del lado del cliente
     if (!formData.nombre.trim() || formData.nombre.trim().length < 3) {
       newErrors.nombre = "Nombre debe tener al menos 3 caracteres";
     }
@@ -129,11 +130,9 @@ export default function Register() {
     }
 
     try {
-      // Preparar datos para enviar (eliminar confirmPassword)
       const { confirmPassword, ...datosEnvio } = formData;
       const res = await axios.post("/api/auth/registrar", datosEnvio);
 
-      // Guardar el token
       login(res.data.token);
 
       await Swal.fire({
@@ -142,20 +141,24 @@ export default function Register() {
         icon: "success",
         confirmButtonText: "Iniciar sesión"
       });
-      
+
       navigate("/");
     } catch (error) {
       console.error("Error al registrar:", error);
       let errorMessage = "Ocurrió un error al registrar";
-      
+
       if (error.response) {
-        if (error.response.data.msg === "El usuario ya existe") {
-          errorMessage = `El ${error.response.data.campo} ya está registrado`;
+        const { msg, campo } = error.response.data;
+
+        if (campo && msg) {
+          // Mostrar error directamente en el campo correspondiente
+          setErrors(prev => ({ ...prev, [campo]: msg }));
+          errorMessage = msg;
         } else {
-          errorMessage = error.response.data.msg || errorMessage;
+          errorMessage = msg || errorMessage;
         }
       }
-      
+
       Swal.fire("Error", errorMessage, "error");
     } finally {
       setIsSubmitting(false);
