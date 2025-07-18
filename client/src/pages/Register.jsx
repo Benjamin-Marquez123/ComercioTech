@@ -133,7 +133,7 @@ export default function Register() {
       const { confirmPassword, ...datosEnvio } = formData;
       const res = await axios.post("/api/auth/registrar", datosEnvio);
 
-      login(res.data.token);
+      localStorage.setItem('token', res.data.token);
 
       await Swal.fire({
         title: "¡Registro exitoso!",
